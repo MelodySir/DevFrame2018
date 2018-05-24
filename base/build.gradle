@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+}
+
+dependencies {
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api 'com.android.support:appcompat-v7:27.1.1'
+    api 'com.android.support:multidex:1.0.3'
+
+    api 'com.alibaba:fastjson:1.2.39'
+
+    api 'com.blankj:utilcode:1.15.1'
+
+//    implementation("com.github.hotchemi:permissionsdispatcher:2.1.3") {
+//        // if you don't use android.app.Fragment you can exclude support for them
+//        exclude module: "support-v13"
+//        exclude module: "support-v4"
+//    }
+    api ('com.github.hotchemi:permissionsdispatcher:3.2.0'){
+        exclude module: "support-v13"
+        exclude module: "support-v4"
+    }
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.2.0"
+}
