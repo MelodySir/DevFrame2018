@@ -3,7 +3,6 @@ package com.melody.dev.frame.main.view.impl;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
@@ -13,25 +12,26 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.melody.base.BaseActivity;
 import com.melody.base.BasePresenter;
 import com.melody.dev.frame.R;
-import com.melody.dev.frame.adapter.SplashGuideAdapter;
 import com.melody.dev.frame.main.persenter.SplashPresenter;
 import com.melody.dev.frame.main.view.SplashView;
 import com.melody.dev.frame.utils.MSpUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bingoogolapple.bgabanner.BGABanner;
+import cn.bingoogolapple.bgabanner.BGALocalImageSize;
+import cn.bingoogolapple.bgabanner.BGAOnNoDoubleClickListener;
 
 public class SplashActivity extends BaseActivity implements SplashView {
 
     @BindView(R.id.iv_ad_splash)
-    ImageView ivAdSplash;
+    ImageView bgabAdSplash;
     @BindView(R.id.btn_jump_splash)
     TextView btnJumpSplash;
     @BindView(R.id.vs_guide_splash)
     ViewStub vsGuideSplash;
 
-    private ViewPager guideViewPager;
-
+    private BGABanner bgBanner, fgBanner;
     private SplashPresenter mPresenter;
 
     @Override
@@ -61,22 +61,46 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
     @Override
     public void initSplashView() {
-        btnJumpSplash.setOnClickListener(new View.OnClickListener() {
+        btnJumpSplash.setText("跳过 0");
+        btnJumpSplash.setOnClickListener(new BGAOnNoDoubleClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onNoDoubleClick(View v) {
                 ActivityUtils.startActivity(new Intent(mContext, MainActivity.class));
                 finish();
             }
         });
-        btnJumpSplash.setText("跳过 0");
-        btnJumpSplash.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void loadGuideView() {
         vsGuideSplash.inflate();
-        guideViewPager = findViewById(R.id.vp_guide);
-        guideViewPager.setAdapter(new SplashGuideAdapter(getSupportFragmentManager()));
+        bgBanner = findViewById(R.id.bgab_bg_view_guide);
+        fgBanner = findViewById(R.id.bgab_fg_view_guide);
+
+        // Bitmap 的宽高在 maxWidth maxHeight 和 minWidth minHeight 之间
+        BGALocalImageSize localImageSize = new BGALocalImageSize(720, 1280, 320, 640);
+
+        bgBanner.setData(localImageSize,
+                ImageView.ScaleType.CENTER_CROP,
+                R.mipmap.image_guide_background_1,
+                R.mipmap.image_guide_background_2,
+                R.mipmap.image_guide_background_3);
+
+        fgBanner.setData(localImageSize,
+                ImageView.ScaleType.CENTER_CROP,
+                R.mipmap.image_guide_foreground_1,
+                R.mipmap.image_guide_foreground_2,
+                R.mipmap.image_guide_foreground_3);
+
+
+        fgBanner.setEnterSkipViewIdAndDelegate(R.id.tv_enter_view_guide, 0, new BGABanner.GuideDelegate() {
+            @Override
+            public void onClickEnterOrSkip() {
+                ActivityUtils.startActivity(new Intent(mContext, MainActivity.class));
+                finish();
+            }
+        });
+
     }
 
 }

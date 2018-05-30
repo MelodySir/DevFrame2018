@@ -5,27 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/iv_ad_splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/iv_ad_splash"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/icon_word"
-            tools:ignore="ContentDescription" />
-
-    </LinearLayout>
+        android:scaleType="centerCrop"
+        android:src="@mipmap/image_guide_background_3"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/btn_jump_splash"
@@ -41,7 +27,7 @@
         android:paddingTop="5dp"
         android:textColor="@color/white"
         android:textSize="13sp"
-        android:visibility="invisible" />
+        tools:ignore="RelativeOverlap" />
 
     <ViewStub
         android:id="@+id/vs_guide_splash"
