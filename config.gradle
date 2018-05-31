@@ -36,6 +36,8 @@ ext {
             glideAp                : "com.github.bumptech.glide:compiler:4.7.1",
             // 圆角ImageView
             circleimageview        : "de.hdodenhof:circleimageview:2.2.0",
+            // 图片选择器
+            matisse                : "com.zhihu.android:matisse:0.4.3",
             // 图片预览
             photoview              : "com.github.chrisbanes:PhotoView:latest.release.here",
             // 图片压缩
@@ -53,6 +55,8 @@ ext {
             fastjsonAndroid        : "com.alibaba:fastjson:1.1.68.android",
             // 事件总线
             eventBus               : "org.greenrobot:eventbus:3.1.1",
+            // 创建文本图片
+            textdrawable           : "com.amulyakhare:com.amulyakhare.textdrawable:1.0.1",
             // 图片轮播（需要v4）
             bgaBanner              : "cn.bingoogolapple:bga-banner:2.2.4@aar",
             // 下拉刷新（必须有appcompat-v7:23+）
