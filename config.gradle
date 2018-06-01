@@ -4,7 +4,7 @@ ext {
             compileSdk : 27,
             buildTools : "27.0.3",
 
-            minSdk     : 15,
+            minSdk     : 16,
             targetSdk  : 27,
 
             versionCode: 1,

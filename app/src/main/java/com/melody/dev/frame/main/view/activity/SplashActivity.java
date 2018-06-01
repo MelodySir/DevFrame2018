@@ -1,20 +1,18 @@
-package com.melody.dev.frame.main.view.impl;
+package com.melody.dev.frame.main.view.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewStub;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.melody.base.BaseActivity;
-import com.melody.base.BasePresenter;
 import com.melody.dev.frame.R;
+import com.melody.dev.frame.main.model.SplashModel;
 import com.melody.dev.frame.main.persenter.SplashPresenter;
 import com.melody.dev.frame.main.view.SplashView;
-import com.melody.dev.frame.utils.MSpUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +20,9 @@ import cn.bingoogolapple.bgabanner.BGABanner;
 import cn.bingoogolapple.bgabanner.BGALocalImageSize;
 import cn.bingoogolapple.bgabanner.BGAOnNoDoubleClickListener;
 
-public class SplashActivity extends BaseActivity implements SplashView {
+public class SplashActivity
+        extends BaseActivity<SplashModel, SplashView, SplashPresenter>
+        implements SplashView {
 
     @BindView(R.id.iv_ad_splash)
     ImageView bgabAdSplash;
@@ -32,51 +32,62 @@ public class SplashActivity extends BaseActivity implements SplashView {
     ViewStub vsGuideSplash;
 
     private BGABanner bgBanner, fgBanner;
-    private SplashPresenter mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        ButterKnife.bind(this);
-        mPresenter = new SplashPresenter(this);
-        initView();
+        setContentView(getLayoutResourceId());
+        butterKnifeUnBinder = ButterKnife.bind(this);
     }
 
     @Override
-    public BasePresenter getPresenter() {
-        return mPresenter;
+    public SplashPresenter createPresenter() {
+        return new SplashPresenter(this);
     }
 
     @Override
-    public void initView() {
-        try {
-            if (MSpUtils.isFirstLaunch())
-                loadGuideView();
-            else initSplashView();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void preSetContentView() {
+        //设置全屏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+//    @Override
+//    public void afterSetContentView() {
+//        butterKnifeUnBinder = ButterKnife.bind(this);
+//    }
+
+    @Override
+    public void onCreateFinished() {
+//        mPresenter.showView();
     }
 
     @Override
-    public void initSplashView() {
+    public int getLayoutResourceId() {
+        return R.layout.activity_splash;
+    }
+
+    @Override
+    public void showSplashView() {
         btnJumpSplash.setText("跳过 0");
         btnJumpSplash.setOnClickListener(new BGAOnNoDoubleClickListener() {
             @Override
             public void onNoDoubleClick(View v) {
-                ActivityUtils.startActivity(new Intent(mContext, MainActivity.class));
-                finish();
+                mPresenter.enterMainPage(mActivity);
             }
         });
     }
 
-    @Override
-    public void loadGuideView() {
-        vsGuideSplash.inflate();
-        bgBanner = findViewById(R.id.bgab_bg_view_guide);
-        fgBanner = findViewById(R.id.bgab_fg_view_guide);
+    private void initGuideView() {
+        if (bgBanner == null || fgBanner == null) {
+            vsGuideSplash.inflate();
+            bgBanner = findViewById(R.id.bgab_bg_view_guide);
+            fgBanner = findViewById(R.id.bgab_fg_view_guide);
+        }
+    }
 
+    @Override
+    public void showGuideView() {
+        initGuideView();
         // Bitmap 的宽高在 maxWidth maxHeight 和 minWidth minHeight 之间
         BGALocalImageSize localImageSize = new BGALocalImageSize(720, 1280, 320, 640);
 
@@ -96,8 +107,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
         fgBanner.setEnterSkipViewIdAndDelegate(R.id.tv_enter_view_guide, 0, new BGABanner.GuideDelegate() {
             @Override
             public void onClickEnterOrSkip() {
-                ActivityUtils.startActivity(new Intent(mContext, MainActivity.class));
-                finish();
+                mPresenter.enterMainPage(mActivity);
             }
         });
 

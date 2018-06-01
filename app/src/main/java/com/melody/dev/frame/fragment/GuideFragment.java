@@ -13,7 +13,7 @@ import android.widget.ImageView;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.melody.dev.frame.R;
-import com.melody.dev.frame.main.view.impl.MainActivity;
+import com.melody.dev.frame.main.view.activity.MainActivity;
 
 @SuppressLint("ValidFragment")
 public class GuideFragment extends Fragment {

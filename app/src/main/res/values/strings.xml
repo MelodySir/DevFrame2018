@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Melody</string>
+    <string name="melody_app_name">Melody</string>
     <string name="experience_immediately">立即体验</string>
 </resources>

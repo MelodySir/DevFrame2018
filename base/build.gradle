@@ -29,6 +29,9 @@ dependencies {
     api deps.fastjsonAndroid
     api deps.utilcode
 
+    api deps.butterKnife
+    annotationProcessor deps.butterKnifeAp
+
     api (deps.permissionsDispatcher){
         exclude module: "support-v13"
         exclude module: "support-v4"

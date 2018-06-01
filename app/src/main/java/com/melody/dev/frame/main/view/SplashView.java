@@ -4,12 +4,11 @@ import com.melody.base.BaseView;
 
 public interface SplashView extends BaseView{
 
-    //初始化视图
-    void initView();
+    // 显示闪屏页
+    void showSplashView();
 
-    void initSplashView();
-
-    void loadGuideView();
+    // 显示引导页
+    void showGuideView();
 
 
 }
