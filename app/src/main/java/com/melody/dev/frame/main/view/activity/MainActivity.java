@@ -10,8 +10,6 @@ import com.melody.dev.frame.main.model.MainModel;
 import com.melody.dev.frame.main.persenter.MainPresenter;
 import com.melody.dev.frame.main.view.MainView;
 
-import butterknife.ButterKnife;
-
 public class MainActivity
         extends BaseActivity<MainModel, MainView, MainPresenter>
         implements MainView {
@@ -19,13 +17,11 @@ public class MainActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutResourceId());
-        butterKnifeUnBinder = ButterKnife.bind(this);
     }
 
-//    @Override
-//    public void afterSetContentView() {
-//    }
+    @Override
+    public void afterSetContentView() {
+    }
 
     @Override
     public MainPresenter createPresenter() {

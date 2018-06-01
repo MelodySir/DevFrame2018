@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.LogUtils;
@@ -34,8 +33,8 @@ public abstract class BaseActivity<V extends BaseModel, T extends BaseView, P ex
         showLifeCycleLog("onCreate()");
         preSetContentView();
         setContentView(getLayoutResourceId());
-//        afterSetContentView();
-//        butterKnifeUnBinder = ButterKnife.bind(layoutView);
+        afterSetContentView();
+        butterKnifeUnBinder = ButterKnife.bind(this);
         mContext = this;
         mActivity = this;
         mPresenter = createPresenter();
@@ -133,9 +132,10 @@ public abstract class BaseActivity<V extends BaseModel, T extends BaseView, P ex
     // 重写可在setContentView之前做操作
     public void preSetContentView() {
     }
+
     // 重写可在setContentView之后做操作
-//    public void afterSetContentView() {
-//    }
+    public void afterSetContentView() {
+    }
 
     // 初始化Presenter
     public abstract P createPresenter();

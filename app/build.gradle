@@ -50,6 +50,9 @@ dependencies {
     implementation deps.eventBus
     implementation deps.bgaBanner
 
+    //此依赖必须添加
+    annotationProcessor deps.butterKnifeAp
+
     testImplementation deps.testJunit
     androidTestImplementation deps.testRunner
     androidTestImplementation deps.testEspresso

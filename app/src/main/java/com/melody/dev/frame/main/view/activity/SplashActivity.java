@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.melody.base.BaseActivity;
 import com.melody.dev.frame.R;
 import com.melody.dev.frame.main.model.SplashModel;
@@ -36,8 +37,6 @@ public class SplashActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutResourceId());
-        butterKnifeUnBinder = ButterKnife.bind(this);
     }
 
     @Override
@@ -51,14 +50,13 @@ public class SplashActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
-//    @Override
-//    public void afterSetContentView() {
-//        butterKnifeUnBinder = ButterKnife.bind(this);
-//    }
+    @Override
+    public void afterSetContentView() {
+    }
 
     @Override
     public void onCreateFinished() {
-//        mPresenter.showView();
+        mPresenter.showView();
     }
 
     @Override
