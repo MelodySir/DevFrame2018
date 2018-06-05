@@ -28,6 +28,8 @@ dependencies {
     api deps.multidex
     api deps.fastjsonAndroid
     api deps.utilcode
+    api deps.design
+    api deps.supportVectorDrawable
 
     api deps.butterKnife
     annotationProcessor deps.butterKnifeAp

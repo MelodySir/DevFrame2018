@@ -1,6 +1,7 @@
 package com.melody.base.utils;
 
 import android.app.Activity;
+import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,7 +30,9 @@ public class StatusBarUtils {
     }
 
     //获取视图
-    public View getmStatusBarView(Activity mActivity) {
+    public View getStatusBarView(Activity mActivity) {
+        // 19以下版本无需生成状态栏
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return null;
         if (mStatusBarView == null) createStatusView(mActivity);
         return mStatusBarView;
     }
@@ -51,7 +54,7 @@ public class StatusBarUtils {
      * 生成一个和状态栏大小相同的矩形条 * * @param activity 需要设置的activity * * @param color 状态栏颜色值 * * @return 状态栏矩形条
      */
     private void createStatusView(Activity mActivity) {
-        if (mStatusBarView == null) return;
+        if (mStatusBarView != null) return;
         mStatusBarView = new View(mActivity);
         initParams(mActivity);
         mStatusBarView.setLayoutParams(layoutParams);

@@ -25,4 +25,5 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+// 配置文件
 apply from: 'config.gradle'

@@ -2,17 +2,26 @@ package com.melody.dev.frame.main.view.activity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.melody.base.BaseActivity;
+import com.melody.base.utils.StatusBarUtils;
 import com.melody.dev.frame.R;
 import com.melody.dev.frame.main.model.MainModel;
 import com.melody.dev.frame.main.persenter.MainPresenter;
 import com.melody.dev.frame.main.view.MainView;
 
+import butterknife.BindView;
+
 public class MainActivity
         extends BaseActivity<MainModel, MainView, MainPresenter>
         implements MainView {
+
+    @BindView(R.id.vp_main)
+    ViewPager vpMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +43,12 @@ public class MainActivity
     }
 
     @Override
+    public void onCreateFinished() {
+        mPresenter.initViewPager(vpMain, getSupportFragmentManager());
+
+    }
+
+    @Override
     public void preSetContentView() {
         //沉浸式状态栏
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { //透明状态栏
@@ -41,4 +56,5 @@ public class MainActivity
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
     }
+
 }

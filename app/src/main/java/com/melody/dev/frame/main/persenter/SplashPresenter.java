@@ -8,7 +8,6 @@ import com.melody.base.BasePresenter;
 import com.melody.dev.frame.main.model.SplashModel;
 import com.melody.dev.frame.main.model.impl.SplashModelImpl;
 import com.melody.dev.frame.main.view.SplashView;
-import com.melody.dev.frame.main.view.activity.MainActivity;
 
 public class SplashPresenter extends BasePresenter<SplashModel, SplashView> {
 
@@ -24,7 +23,7 @@ public class SplashPresenter extends BasePresenter<SplashModel, SplashView> {
 
     //进入主页
     public void enterMainPage(Activity activity) {
-        ActivityUtils.startActivity(new Intent(activity, MainActivity.class));
+        ActivityUtils.startActivity(new Intent(activity, com.melody.dev.frame.main.view.activity.MainActivity.class));
         activity.finish();
     }
 

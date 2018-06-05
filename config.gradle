@@ -26,6 +26,7 @@ ext {
             appcompatV7            : "com.android.support:appcompat-v7:27.1.1",
             design                 : 'com.android.support:design:27.1.1',
             recyclerView           : 'com.android.support:recyclerview-v7:27.1.1',
+            supportVectorDrawable  : 'com.android.support:support-vector-drawable:27.1.1',
 
             // RecyclerView 适配器
             recyclerViewAdapter    : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30",

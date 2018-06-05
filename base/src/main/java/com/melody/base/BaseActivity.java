@@ -70,7 +70,8 @@ public abstract class BaseActivity<V extends BaseModel, T extends BaseView, P ex
         super.onDestroy();
         showLifeCycleLog("onDestroy()");
         mPresenter.detach();
-        butterKnifeUnBinder.unbind();
+        if (butterKnifeUnBinder != null)
+            butterKnifeUnBinder.unbind();
     }
 
     @Override

@@ -49,7 +49,7 @@ public abstract class BaseFragment extends Fragment {
         showLifeCycleLog("onCreateView()");
         onCreateViewStart();
         View fragmentView = inflater.inflate(getLayoutResourceId(), container, false);
-//        butterKnifeUnBinder = ButterKnife.bind(this, fragmentView);
+        butterKnifeUnBinder = ButterKnife.bind(this, fragmentView);
         onCreateViewFinished(fragmentView);
         return fragmentView;
     }
