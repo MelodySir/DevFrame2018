@@ -8,7 +8,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.melody.base.BaseActivity;
 import com.melody.dev.frame.R;
 import com.melody.dev.frame.main.model.SplashModel;
@@ -16,7 +15,6 @@ import com.melody.dev.frame.main.persenter.SplashPresenter;
 import com.melody.dev.frame.main.view.SplashView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import cn.bingoogolapple.bgabanner.BGALocalImageSize;
 import cn.bingoogolapple.bgabanner.BGAOnNoDoubleClickListener;
@@ -57,6 +55,7 @@ public class SplashActivity
     @Override
     public void onCreateFinished() {
         mPresenter.showView();
+        mPresenter.startCountDown();
     }
 
     @Override
@@ -66,7 +65,7 @@ public class SplashActivity
 
     @Override
     public void showSplashView() {
-        btnJumpSplash.setText("跳过 0");
+//        setJumpBtnTime(0);
         btnJumpSplash.setOnClickListener(new BGAOnNoDoubleClickListener() {
             @Override
             public void onNoDoubleClick(View v) {
@@ -111,4 +110,19 @@ public class SplashActivity
 
     }
 
+    @Override
+    public void setJumpBtnTime(int seconds) {
+        btnJumpSplash.setText("跳过 " + seconds);
+    }
+
+    @Override
+    public void enterMainPage() {
+        mPresenter.enterMainPage(mActivity);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPresenter.destroy();
+        super.onDestroy();
+    }
 }

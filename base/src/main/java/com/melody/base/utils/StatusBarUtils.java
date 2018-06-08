@@ -9,6 +9,7 @@ import com.blankj.utilcode.util.ScreenUtils;
 
 /**
  * 使用自定义状态栏背景时需设置全屏
+ * 实现方式：设置一条与状态栏等高view
  */
 public class StatusBarUtils {
 
@@ -38,15 +39,18 @@ public class StatusBarUtils {
     }
 
     //设置颜色
-    public void setmStatusBarColor(int color) {
+    public void setStatusBarColor(int color) {
         if (mStatusBarView == null) return;
         mStatusBarView.setBackgroundColor(color);
     }
 
     //显示隐藏
-    public void setmStatusBarVisibility(boolean show) {
+    public void setStatusBarVisibility(boolean show) {
         if (mStatusBarView == null) return;
-        mStatusBarView.setVisibility(show ? View.VISIBLE : View.GONE);
+        int visibility = show ? View.VISIBLE : View.GONE;
+        //如果要设置状态与原状态一直，无需设置
+        if (visibility == mStatusBarView.getVisibility()) return;
+        mStatusBarView.setVisibility(visibility);
     }
 
 

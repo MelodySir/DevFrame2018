@@ -3,12 +3,10 @@ package com.melody.dev.frame.main.view.activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 import com.melody.base.BaseActivity;
-import com.melody.base.utils.StatusBarUtils;
+import com.melody.base.bottombar.BottomBarLayout;
 import com.melody.dev.frame.R;
 import com.melody.dev.frame.main.model.MainModel;
 import com.melody.dev.frame.main.persenter.MainPresenter;
@@ -22,6 +20,8 @@ public class MainActivity
 
     @BindView(R.id.vp_main)
     ViewPager vpMain;
+    @BindView(R.id.bb_main)
+    BottomBarLayout bbMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MainActivity
     @Override
     public void onCreateFinished() {
         mPresenter.initViewPager(vpMain, getSupportFragmentManager());
-
+        mPresenter.initBottomBar(bbMain,vpMain);
     }
 
     @Override
